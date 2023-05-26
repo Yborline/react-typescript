@@ -3,27 +3,26 @@ import s from './Counter.module.css'
 
 
 
-interface Props {
-  initialValue?: number;
-  initialStep?: number;
-}
 
 
 // const Counter: React.FC<Props> = ({ initialValue = 0, initialStep = 1 }) => {
-  const Counter= ({initialValue = 0 ,initialStep = 1}:Props) => {
+  const Counter= ({initialValue = 0 ,initialStep = 1}) => {
 
     const [value, setValue] = useState<number>(initialValue);
 
 
   const changeIncrement = () => {
-    setValue(value + initialStep);
+    setValue(value => value + initialStep);
+    setValue(value => value + initialStep);
+        setValue(value =>value + initialStep);
   };
 
   const changeDecrement = () => {
     if (value === 0) {
       return;
     }
-    setValue(value - initialStep);
+    setValue(value => value - initialStep);
+    
   };
 
   return (

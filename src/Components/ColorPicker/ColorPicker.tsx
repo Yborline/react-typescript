@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
 import './ColorPicker.css';
 
-type Object = {
+interface IOptions {
   label: string;
   color: string;
-};
 
-interface Props {
-  options: Object[];
+}
+
+interface Props{
+  options: IOptions[];
   initialOptionPos?: number;
 }
 
-const ColorPicker = ({ options, initialOptionPos = 1 }: Props) => {
+
+const ColorPicker = ({ options, initialOptionPos = 1 }:Props) => {
   const [activeOptionIdx, setActiveOptionIdx] = useState(initialOptionPos - 1);
   const [backgroundColor ,setBackgroundColor] = useState('')
 
-  const setActiveIdx = (index: number) => setActiveOptionIdx(index);
+  const setActiveIdx = (index:number) => setActiveOptionIdx(index);
 
-  const makeOptionClassName = (index: number , color: string) => {
+  const makeOptionClassName = (index :number , color :string) => {
     const optionClasses = ['ColorPickerOption'];
  
 
@@ -38,7 +40,7 @@ const ColorPicker = ({ options, initialOptionPos = 1 }: Props) => {
     <div className="ColorPicker" style={{backgroundColor:backgroundColor}}>
       <h2 className="ColorPicker__title">Color Picker</h2>
       <p>Выбран цвет: {label}</p>
-      <div>
+      <div style={{backgroundColor:"white"}}>
         {options.map(({ label, color }, index) => (
           <button
             key={label}

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 // interface Props {
 //   onSubmit: (cred: { email: string; password: string }) => void;
@@ -11,15 +11,28 @@ onSubmit:(cred: {email:string, password:string})=> void
     // onSubmit: Submit;
 }
 
-
+console.log('ss')
 export default function Form({ onSubmit }:Props) {
   const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const formRef = useRef(null);
+    const h1Ref = useRef<HTMLHeadingElement>(null);
 
+// const inputRef = document.querySelector('input');
 
+// console.log(inputRef)
+  useLayoutEffect(() => {
+    console.log(h1Ref)
+    const  changeInnerText =(el: HTMLElement, value: string)=> {
+  el.innerText = value;
+}
+    if (null !== h1Ref.current) {
 
-
+changeInnerText(h1Ref.current, 'hello world');
+}
+    
+    
+  },[])
+  
   const onChange = (evt:  React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = evt.currentTarget;
 
@@ -42,9 +55,10 @@ export default function Form({ onSubmit }:Props) {
 
     onSubmit({ email, password });
   };
-  console.log(formRef)
+
   return (
-    <form onSubmit={handleSubmit} ref={formRef} >
+    <form autoComplete='off' onSubmit={handleSubmit}  >
+      <h1 ref={h1Ref}>Lol</h1>
       <label>
         Почта
         <input type="mail" name="email" onChange={onChange} value={email} />
